@@ -1,0 +1,25 @@
+{{ partial "header.html" . }}
+<div class="container">
+  <div class="row">
+    <div class="col-md-offset-1 col-md-10">
+      <h1>{{ .Title }}</h1>
+      <em>{{ .Params.summary }}</em><br>
+      <span class="badge">{{ .Date.Format "2006-01-02" }}</span>
+      {{ range $i, $e := .Params.categories }}
+        {{if $i}} , {{end}}
+        <a href="/categories/{{ . | urlize }}" class="label label-primary">{{ . }}</a>
+      {{ end }}
+      {{ range $i, $e := .Params.tags }}
+        {{if $i}} , {{end}}
+        <a href="/tags/{{ . | urlize }}" class="label label-success">{{ . }}</a>
+      {{ end }}
+    </div>
+  </div>
+  <div class="row">
+    <br>
+    <div class="col-md-offset-1 col-md-10">
+      {{ .Content }}
+    </div>
+  </div>
+</div>
+{{ partial "footer.html" . }}

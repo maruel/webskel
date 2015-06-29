@@ -1,0 +1,79 @@
+{{/*
+Non-bootstrap specific common HEAD tags. Contains all the social sites metadata.
+*/}}
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<base href="{{ .Site.BaseUrl }}">
+<title>{{.Title}}</title>
+<link rel="canonical" href="{{ .Permalink }}">
+
+<!-- Google & Bing:
+  Conflicting information:
+  https://support.google.com/webmasters/answer/35624
+  https://developers.google.com/custom-search/docs/structured_data#using-meta-tags
+  http://googlewebmastercentral.blogspot.ca/2007/09/improve-snippets-with-meta-description.html
+-->
+{{ $summary := or .Params.summary .Site.Params.summary }}
+<meta name="description" content="{{ $summary }}" />
+{{ if ne .Date.Year 1 }}
+  <meta name="pubdate" content="{{ .Date.Format "2006-01-02" }}" />
+{{ end }}
+
+<!-- Twitter:
+  https://dev.twitter.com/cards/types/summary
+  https://cards-dev.twitter.com/validator
+-->
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:description" content="{{ $summary }}" />
+<meta name="twitter:image" content="{{ .Site.Params.image }}" />
+{{ if .Site.Params.twitter }}
+<meta name="twitter:site" content="@{{ .Site.Params.twitter }}" />
+{{ end }}
+<meta name="twitter:title" content="{{ .Title }}" />
+
+<!-- Facebook:
+  http://ogp.me
+  https://developers.facebook.com/tools/debug/
+-->
+{{ if ne .Date.Year 1 }}
+  <meta property="article:published_time" content="{{ .Date.Format "2006-01-02" }}" />
+{{ end }}
+<meta property="og:description" content="{{ $summary }}" />
+<meta property="og:image" content="{{ .Site.Params.image }}" />
+<meta property="og:locale" content="{{ .Site.LanguageCode }}" />
+<meta property="og:site_name" content="{{ .Site.Title }}" />
+<meta property="og:title" content="{{ .Title }}" />
+{{/* TODO(maruel): Posts should be article. */}}
+<meta property="og:type" content="website" />
+<meta property="og:url" content="{{ .Permalink }}" />
+
+<!-- Google & Bing:
+  https://developers.google.com/structured-data/customize/social-profiles
+  http://schema.org/Person
+  https://developers.google.com/structured-data/testing-tool/
+-->
+<script type="application/ld+json">
+  {
+    "@context": "http://schema.org",
+    "@type": "Person",
+    "name": "{{ .Site.Copyright }}",
+    "description": {{ $summary }},
+    "email": "mailto:{{ .Site.Params.email }}",
+    "url": "{{ .Site.BaseURL }}",
+    "image": "{{ .Site.Params.image }}",
+    "sameAs": [
+      "https://twitter.com/{{ .Site.Params.twitter }}",
+      "https://www.linkedin.com/in/CHANGE_ME",
+      "https://plus.google.com/+CHANGE_ME"
+    ],
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": "CHANGE_ME",
+      "addressRegion": "CHANGE_ME"
+    },
+    "worksFor": {
+      "@type": "Organization",
+      "name": "CHANGE_ME"
+    }
+  }
+</script>

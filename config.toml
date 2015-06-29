@@ -1,0 +1,27 @@
+# General settings.
+canonifyurls = false
+verbose = true
+
+# Configure these.
+baseurl = "https://CHANGE_ME: your domain"
+copyright = "CHANGE_ME: your full name"
+languageCode = "en-us"
+title = "CHANGE_ME's website"
+
+[params]
+  # Optional: Set it to the UA-12345678-1 as generated via
+  # https://www.google.com/analytics.
+  analytics = ""
+
+  # Optional: Your email address.
+  email = ""
+
+  # Optional: The image used to represent the web page when shared on a social
+  # site (Facebook, Twitter).
+  image = ""
+
+  # Optional: Page's summary when the page defines none.
+  summary = ""
+
+  # Optional: Your twitter acccount if you have one.
+  twitter = ""

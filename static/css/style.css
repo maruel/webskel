@@ -1,0 +1,40 @@
+/* Ref: http://getbootstrap.com/css/ */
+@media (min-width: 768px) {
+  .navbar {
+    border-radius: 4px;
+  }
+}
+.navbar {
+  border: 1px solid #004b63;
+}
+
+/* Used in index.html */
+.myself {
+  margin-left: 5px;
+  width: 105px;
+}
+.myself .picture {
+  width: 100px;
+  border-radius: 5px;
+  box-shadow: 1px 2px 3px rgba(0,0,0,.5);
+}
+/* TODO(maruel): Figure out a way to make this automatic where it expand based
+ * on available size */
+@media (min-width: 620px) {
+  .myself {
+    width: 205px;
+  }
+  .myself .picture {
+    width: 200px;
+    border-radius: 15px;
+  }
+}
+@media (min-width: 768px) {
+  .myself {
+    width: 305px;
+  }
+  .myself .picture {
+    width: 300px;
+    border-radius: 15px;
+  }
+}

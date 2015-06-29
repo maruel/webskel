@@ -1,0 +1,16 @@
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+{{/*
+  .Site.BaseURL is of type template.URL but .Permalink is of type string, so eq
+  always return false. So compare the length of the strings instead, which works.
+  The problem is that Google Webmaster tools doesn't like when the root page is
+  redirected, so we need to trim the trailing / for the root page.
+*/}}
+{{ $baseLen := len .Site.BaseURL }}{{ range .Data.Pages.ByDate }}
+  <url>
+    <loc>{{ $url := substr .Permalink 0 -1 }}{{ $urlLen := len $url }}{{ if eq $urlLen $baseLen }}{{ .Site.BaseURL }}{{ else }}{{ .Permalink }}{{ end }}</loc>{{ if ne .Date.Year 1 }}
+    <lastmod>{{ safeHTML ( .Date.Format "2006-01-02T15:04:05-07:00" ) }}</lastmod>{{ end }}{{ with .Sitemap.ChangeFreq }}
+    <changefreq>{{ . }}</changefreq>{{ end }}{{ if ge .Sitemap.Priority 0.0 }}
+    <priority>{{ .Sitemap.Priority }}</priority>{{ end }}
+  </url>
+{{ end }}
+</urlset>
